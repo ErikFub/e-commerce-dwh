@@ -1,0 +1,27 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="13">
+            <item index="0" class="java.lang.String" itemvalue="scikeras" />
+            <item index="1" class="java.lang.String" itemvalue="scipy" />
+            <item index="2" class="java.lang.String" itemvalue="wordcloud" />
+            <item index="3" class="java.lang.String" itemvalue="sklearn-gbmi" />
+            <item index="4" class="java.lang.String" itemvalue="catboost" />
+            <item index="5" class="java.lang.String" itemvalue="shap" />
+            <item index="6" class="java.lang.String" itemvalue="tensorflow-metal" />
+            <item index="7" class="java.lang.String" itemvalue="scikit-optimize" />
+            <item index="8" class="java.lang.String" itemvalue="interpret" />
+            <item index="9" class="java.lang.String" itemvalue="keras" />
+            <item index="10" class="java.lang.String" itemvalue="sweetviz" />
+            <item index="11" class="java.lang.String" itemvalue="tensorflow-macos" />
+            <item index="12" class="java.lang.String" itemvalue="numpy" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
