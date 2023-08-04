@@ -1,0 +1,32 @@
+version: 2
+
+sources:
+  - name: landing
+    database: ecommerce_dwh
+    schema: landing
+    description: Data from application database, brought in by an EL process.
+    tables:
+      - name: address
+      - name: articles
+      - name: colors
+        columns:
+        - name: id
+        - name: name
+        - name: rgb
+      - name: customer
+        columns:
+        - name: id
+        - name: firstname
+        - name: lastname
+        - name: gender
+        - name: email
+        - name: dateofbirth
+        - name: currentaddressid
+        - name: created
+        - name: updated
+      - name: labels
+      - name: order
+      - name: order_positions
+      - name: products
+      - name: sizes
+      - name: stock
