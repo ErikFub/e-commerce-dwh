@@ -7,10 +7,13 @@
       unique_key='id',
 
       strategy='timestamp',
-      updated_at='updated',
+      updated_at='updated_at_for_snapshot',
     )
 }}
 
-select * from {{ source('landing', 'customer') }}
+select 
+  *,
+  coalesce(updated, created) as updated_at_for_snapshot 
+from {{ source('landing', 'customer') }}
 
 {% endsnapshot %}
