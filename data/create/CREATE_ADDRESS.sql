@@ -1,4 +1,4 @@
-INSERT INTO landing.address (id, customerid, firstname, lastname, address1, city, zip)
+INSERT INTO raw.application__address (id, customerid, firstname, lastname, address1, city, zip)
 VALUES (1108, 108, 'Sarie', 'Verdoold', '5718 Rue Jean-Baldassini', 'Eriswil', '9937'),
        (1109, 109, 'Javier', 'Carrasco', '2276 Rue Abel-Hovelacque', 'Buchs (Ag)', '5576'),
        (1110, 110, 'Bernhard', 'Reusch', '3646 Daisy Dr', 'Arvada', '98683'),
@@ -1000,4 +1000,4 @@ VALUES (1108, 108, 'Sarie', 'Verdoold', '5718 Rue Jean-Baldassini', 'Eriswil', '
        (553, 553, 'Corinne', 'Senf', '5422 Rua Três', 'Salto', '23205'),
        (141, 141, 'Adam', 'Møller', '8254 Spring Hill Rd', 'Tamworth', '321');
 
-ALTER TABLE landing.address DROP COLUMN customerId;
+ALTER TABLE raw.application__address DROP COLUMN customerId;

@@ -1,4 +1,4 @@
-INSERT INTO landing.sizes (gender, category, size, size_us, size_uk, size_eu) VALUES
+INSERT INTO raw.application__sizes (gender, category, size, size_us, size_uk, size_eu) VALUES
   ('female', 'Apparel', 'XS', '[2,4)', '[4,6)', '[32,36)'),
   ('female', 'Apparel', 'S', '[4,6)', '[6,10)', '[36,40)'),
   ('female', 'Apparel', 'M', '[6,8)', '[10,14)', '[40,44)'),

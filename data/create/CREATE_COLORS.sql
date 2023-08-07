@@ -1,4 +1,4 @@
-INSERT INTO landing.colors (name, rgb)
+INSERT INTO raw.application__colors (name, rgb)
 VALUES ('INDIANRED', '#CD5C5C'),
        ('LIGHTCORAL', '#F08080'),
        ('SALMON', '#FA8072'),

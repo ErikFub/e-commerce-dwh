@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: application
+    database: ecommerce_dwh
+    schema: raw
+    description: Raw data from main shop application database.
+    tables:
+      - name: address
+        identifier: application__address
+      - name: articles
+        identifier: application__articles
+      - name: colors
+        identifier: application__colors
+      - name: customer
+        identifier: application__customer
+      - name: labels
+        identifier: application__labels
+      - name: order
+        identifier: application__order
+      - name: order_positions
+        identifier: application__order_positions
+      - name: products
+        identifier: application__products
+      - name: sizes
+        identifier: application__sizes
+      - name: stock
+        identifier: application__stock

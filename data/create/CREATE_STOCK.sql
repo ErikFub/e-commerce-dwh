@@ -1,1 +1,1 @@
-INSERT INTO landing.stock (articleid, count) SELECT id, floor(random() * 10) FROM landing.articles;
+INSERT INTO raw.application__stock (articleid, count) SELECT id, floor(random() * 10) FROM raw.application__articles;

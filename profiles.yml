@@ -12,4 +12,4 @@ ecommerce_dwh:
       user: postgres
       password: password
       dbname: ecommerce_dwh
-      schema: landing
+      schema: analytics

@@ -1,6 +1,6 @@
 WITH customers AS (
     SELECT *
-    FROM {{ ref('stg_maindb__customers') }}
+    FROM {{ ref('stg_application__customers') }}
 )
 SELECT c.id,
     c.first_name,

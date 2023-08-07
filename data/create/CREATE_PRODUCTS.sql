@@ -109,8 +109,8 @@ BEGIN
 FOR i in 1..1000 LOOP
 
 
-WITH label AS (SELECT id FROM landing.labels ORDER BY random() LIMIT 1),
-    color AS (SELECT id FROM landing.colors ORDER BY random() LIMIT (random() * 10 / 2) + 1),
+WITH label AS (SELECT id FROM raw.application__labels ORDER BY random() LIMIT 1),
+    color AS (SELECT id FROM raw.application__colors ORDER BY random() LIMIT (random() * 10 / 2) + 1),
     category_and_type AS (SELECT * FROM categories ORDER BY random() LIMIT 1),
     product_name AS (SELECT name FROM names ORDER BY random() LIMIT 1),
     fancy_name AS (SELECT product_type || ' ' || name AS name FROM category_and_type, product_name),
@@ -119,12 +119,12 @@ WITH label AS (SELECT id FROM landing.labels ORDER BY random() LIMIT 1),
             (random() > 0.5)                                       as reduction,
             least(ceil(random() * 100 / 2) :: integer, 40)         as percentage,
             ceil(random() * (150 - 50 + 1) + 50) :: text :: money  as price),
-    sizes AS (SELECT id FROM landing.sizes, gender WHERE landing.sizes.gender = gender.gender_name),
-    product_insert as (INSERT INTO landing.products (name, labelid, category, gender, currentlyactive)
+    sizes AS (SELECT id FROM raw.application__sizes, gender WHERE raw.application__sizes.gender = gender.gender_name),
+    product_insert as (INSERT INTO raw.application__products (name, labelid, category, gender, currentlyactive)
                       (SELECT name, id, category, gender_name, true FROM fancy_name, label, category_and_type, gender)
-                      RETURNING landing.products.id as new_product_id)
+                      RETURNING raw.application__products.id as new_product_id)
 
-INSERT INTO landing.articles (productid, ean, colorid, sizeId, description, originalprice, reducedprice,
+INSERT INTO raw.application__articles (productid, ean, colorid, sizeId, description, originalprice, reducedprice,
                               taxrate, discountinpercent, currentlyactive)
   (SELECT
      new_product_id,

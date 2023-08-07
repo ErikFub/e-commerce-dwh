@@ -1,4 +1,4 @@
-INSERT INTO landing.labels (name, slugname)
+INSERT INTO raw.application__labels (name, slugname)
 VALUES ('A', 'A'),
        ('A.F.C.A', 'AFCA'),
        ('A.P.C.Absolut Joy', 'APCAbsolutJoy'),

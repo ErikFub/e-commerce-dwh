@@ -12,6 +12,6 @@
 }}
 
 select *
-from {{ source('landing', 'sizes') }}
+from {{ source('application', 'sizes') }}
 
 {% endsnapshot %}

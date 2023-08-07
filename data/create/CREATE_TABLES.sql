@@ -1,4 +1,4 @@
-CREATE SCHEMA landing;
+CREATE SCHEMA raw;
 
 CREATE TYPE category AS ENUM (
   'Apparel',
@@ -22,15 +22,15 @@ CREATE TYPE gender AS ENUM (
 
 COMMENT ON TYPE gender IS 'Gender of customer or clothes';
 
-CREATE TABLE landing.colors (
+CREATE TABLE raw.application__colors (
   id   SERIAL PRIMARY KEY,
   name TEXT,
   rgb  TEXT
 );
 
-COMMENT ON TABLE landing.colors IS 'Colors with name and rgb value';
+COMMENT ON TABLE raw.application__colors IS 'Colors with name and rgb value';
 
-CREATE TABLE landing.sizes (
+CREATE TABLE raw.application__sizes (
   id       SERIAL PRIMARY KEY,
   gender   gender,
   category category,
@@ -40,22 +40,22 @@ CREATE TABLE landing.sizes (
   size_EU  int4range
 );
 
-COMMENT ON TABLE landing.sizes IS 'Sizes for US, UK and EU';
+COMMENT ON TABLE raw.application__sizes IS 'Sizes for US, UK and EU';
 
-CREATE TABLE landing.labels (
+CREATE TABLE raw.application__labels (
   id       SERIAL PRIMARY KEY,
   name     TEXT,
   slugName TEXT,
   icon     bytea
 );
 
-COMMENT ON TABLE landing.labels IS 'Brands / labels';
+COMMENT ON TABLE raw.application__labels IS 'Brands / labels';
 
-CREATE TABLE landing.products
+CREATE TABLE raw.application__products
 (
   id              SERIAL PRIMARY KEY,
   name            TEXT,
-  labelId         INTEGER REFERENCES landing.labels (id),
+  labelId         INTEGER REFERENCES raw.application__labels (id),
   category        category,
   gender          gender,
   currentlyActive BOOLEAN,
@@ -63,15 +63,15 @@ CREATE TABLE landing.products
   updated         TIMESTAMP WITH TIME ZONE
 );
 
-COMMENT ON TABLE landing.products IS 'Groups articles (differing in sizes/color)';
+COMMENT ON TABLE raw.application__products IS 'Groups articles (differing in sizes/color)';
 
-CREATE TABLE landing.articles
+CREATE TABLE raw.application__articles
 (
   id                SERIAL PRIMARY KEY,
-  productId         INTEGER REFERENCES landing.products (id),
+  productId         INTEGER REFERENCES raw.application__products (id),
   ean               TEXT,
-  colorId           INTEGER REFERENCES landing.colors (id),
-  sizeId            INTEGER REFERENCES landing.sizes (id),
+  colorId           INTEGER REFERENCES raw.application__colors (id),
+  sizeId            INTEGER REFERENCES raw.application__sizes (id),
   description       TEXT,
   originalPrice     money,
   reducedPrice      money,
@@ -82,19 +82,19 @@ CREATE TABLE landing.articles
   updated           TIMESTAMP WITH TIME ZONE
 );
 
-COMMENT ON TABLE landing.articles IS 'Instance of a product with a size, color and price';
+COMMENT ON TABLE raw.application__articles IS 'Instance of a product with a size, color and price';
 
-CREATE TABLE landing.stock (
+CREATE TABLE raw.application__stock (
   id        SERIAL PRIMARY KEY,
-  articleId INTEGER REFERENCES landing.articles (id),
+  articleId INTEGER REFERENCES raw.application__articles (id),
   count     INTEGER,
   created   TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated   TIMESTAMP WITH TIME ZONE
 );
 
-COMMENT ON TABLE landing.stock IS 'Amount of articles on stock';
+COMMENT ON TABLE raw.application__stock IS 'Amount of articles on stock';
 
-CREATE TABLE landing.customer (
+CREATE TABLE raw.application__customer (
   id               SERIAL PRIMARY KEY,
   firstName        TEXT,
   lastName         TEXT,
@@ -106,9 +106,9 @@ CREATE TABLE landing.customer (
   updated          TIMESTAMP WITH TIME ZONE
 );
 
-COMMENT ON TABLE landing.customer IS 'Basic customer data';
+COMMENT ON TABLE raw.application__customer IS 'Basic customer data';
 
-CREATE TABLE landing.address (
+CREATE TABLE raw.application__address (
   id         SERIAL PRIMARY KEY,
   customerId INTEGER,
   firstName  TEXT,
@@ -121,33 +121,33 @@ CREATE TABLE landing.address (
   updated    TIMESTAMP WITH TIME ZONE
 );
 
-COMMENT ON TABLE landing.address IS 'Addresses for receipts and shipping';
+COMMENT ON TABLE raw.application__address IS 'Addresses for receipts and shipping';
 
-ALTER TABLE landing.customer
+ALTER TABLE raw.application__customer
   ADD CONSTRAINT fk_customer_to_current_address FOREIGN KEY
-  (currentAddressId) REFERENCES landing.address (id);
+  (currentAddressId) REFERENCES raw.application__address (id);
 
-CREATE TABLE landing.order (
+CREATE TABLE raw.application__order (
   id                SERIAL PRIMARY KEY,
-  customerId        INTEGER REFERENCES landing.customer (id),
+  customerId        INTEGER REFERENCES raw.application__customer (id),
   orderTimestamp    TIMESTAMP WITH TIME ZONE DEFAULT now(),
-  shippingAddressId INTEGER REFERENCES landing.address (id),
+  shippingAddressId INTEGER REFERENCES raw.application__address (id),
   total             money,
   shippingCost      money,
   created           TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated           TIMESTAMP WITH TIME ZONE
 );
 
-COMMENT ON TABLE landing.order IS 'Metadata for an order, see order_positions as well';
+COMMENT ON TABLE raw.application__order IS 'Metadata for an order, see order_positions as well';
 
-CREATE TABLE landing.order_positions (
+CREATE TABLE raw.application__order_positions (
   id        SERIAL PRIMARY KEY,
-  orderId   INTEGER REFERENCES landing.order (id),
-  articleId INTEGER REFERENCES landing.articles (id),
+  orderId   INTEGER REFERENCES raw.application__order (id),
+  articleId INTEGER REFERENCES raw.application__articles (id),
   amount    SMALLINT,
   price     money,
   created   TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated   TIMESTAMP WITH TIME ZONE
 );
 
-COMMENT ON TABLE landing.order_positions IS 'Articles that are contained in an order';
+COMMENT ON TABLE raw.application__order_positions IS 'Articles that are contained in an order';

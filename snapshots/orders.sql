@@ -14,6 +14,6 @@
 select 
   *,
   coalesce(updated, created) as updated_at_for_snapshot 
-from {{ source('landing', 'order') }}
+from {{ source('application', 'order') }}
 
 {% endsnapshot %}

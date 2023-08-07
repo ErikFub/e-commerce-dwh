@@ -12,6 +12,6 @@
 }}
 
 select *
-from {{ source('landing', 'labels') }}
+from {{ source('application', 'labels') }}
 
 {% endsnapshot %}

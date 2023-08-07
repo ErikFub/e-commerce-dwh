@@ -1,4 +1,4 @@
-INSERT INTO landing.customer (id, firstname, lastname, gender, email, dateofbirth, currentaddressid)
+INSERT INTO raw.application__customer (id, firstname, lastname, gender, email, dateofbirth, currentaddressid)
 VALUES (127, 'Vera', 'Horton', 'female', 'vera.horton@example.com', '1975-01-08', 1127),
        (128, 'Emilia', 'Halonen', 'female', 'emilia.halonen@example.com', '1958-04-02', 1128),
        (129, 'Jimmie', 'Sanchez', 'male', 'jimmie.sanchez@example.com', '1979-06-28', 1129),
